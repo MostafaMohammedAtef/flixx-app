@@ -1,0 +1,10 @@
+{
+  "name": "Flixx Movie App",
+  "short_name": "Flixx",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#E05A33",
+  "description": "Discover movies and TV shows with Flixx.",
+  "icons": []
+}

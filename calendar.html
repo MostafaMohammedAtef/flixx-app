@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="lib/fontawesome.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/spinner.css" />
+    <script src="js/script.js" defer></script>
+    <title>Flixx | Release Calendar</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <div class="logo"><a href="/">FLIXX</a></div>
+        <nav>
+          <ul>
+            <li><a class="nav-link" href="/">Movies</a></li>
+            <li><a class="nav-link" href="/shows.html">TV Shows</a></li>
+            <li><a class="nav-link" href="/discover.html">Discover</a></li>
+            <li><a class="nav-link" href="/calendar.html">Calendar</a></li>
+            <li>
+              <a class="nav-link" href="/watchlist.html"
+                >Watchlist <span class="watchlist-count">0</span></a
+              >
+            </li>
+            <li>
+              <button
+                class="theme-toggle"
+                type="button"
+                aria-label="Toggle light theme">
+                <i class="fas fa-sun"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="container calendar-page">
+      <div class="page-intro">
+        <span class="eyebrow">Mark the date</span>
+        <h1>Release calendar</h1>
+        <p>Upcoming movies organized by when they arrive.</p>
+      </div>
+      <div id="release-calendar" class="release-calendar"></div>
+    </main>
+    <footer class="main-footer">
+      <div class="container"><div class="logo">FLIXX</div></div>
+    </footer>
+    <div class="spinner"></div>
+  </body>
+</html>

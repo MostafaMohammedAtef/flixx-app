@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="lib/fontawesome.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/spinner.css" />
+    <script src="js/script.js" defer></script>
+    <title>Flixx | Discover</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <div class="logo"><a href="/">FLIXX</a></div>
+        <nav>
+          <ul>
+            <li><a class="nav-link" href="/">Movies</a></li>
+            <li><a class="nav-link" href="/shows.html">TV Shows</a></li>
+            <li><a class="nav-link" href="/discover.html">Discover</a></li>
+            <li><a class="nav-link" href="/calendar.html">Calendar</a></li>
+            <li>
+              <a class="nav-link" href="/watchlist.html"
+                >Watchlist <span class="watchlist-count">0</span></a
+              >
+            </li>
+            <li>
+              <button
+                class="theme-toggle"
+                type="button"
+                aria-label="Toggle light theme">
+                <i class="fas fa-sun"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="container discover-page">
+      <div class="page-intro">
+        <span class="eyebrow">Curated by your taste</span>
+        <h1>Discover something good</h1>
+        <p>Browse popular, highly rated, upcoming, and genre-led picks.</p>
+      </div>
+      <form id="discover-filters" class="filter-bar">
+        <label
+          >Format<select id="discover-type">
+            <option value="movie">Movies</option>
+            <option value="tv">TV Shows</option>
+          </select></label
+        >
+        <label
+          >Genre<select id="discover-genre">
+            <option value="">All genres</option>
+            <option value="28">Action</option>
+            <option value="12">Adventure</option>
+            <option value="35">Comedy</option>
+            <option value="80">Crime</option>
+            <option value="18">Drama</option>
+            <option value="27">Horror</option>
+            <option value="878">Science Fiction</option>
+            <option value="10749">Romance</option>
+          </select></label
+        >
+        <label
+          >Sort by<select id="discover-sort">
+            <option value="popularity.desc">Most popular</option>
+            <option value="vote_average.desc">Highest rated</option>
+            <option value="primary_release_date.desc">Newest releases</option>
+          </select></label
+        >
+        <label
+          >Minimum rating<input
+            id="discover-rating"
+            type="number"
+            min="0"
+            max="10"
+            step="0.5"
+            placeholder="Any"
+        /></label>
+        <label
+          >From year<input
+            id="discover-year-from"
+            type="number"
+            min="1900"
+            max="2100"
+            placeholder="Any"
+        /></label>
+        <label
+          >To year<input
+            id="discover-year-to"
+            type="number"
+            min="1900"
+            max="2100"
+            placeholder="Any"
+        /></label>
+        <button class="btn" type="submit">
+          <i class="fas fa-sliders"></i> Apply
+        </button>
+      </form>
+      <section class="discover-section">
+        <div class="section-heading">
+          <h2 id="discover-heading">Popular Movies</h2>
+        </div>
+        <div id="discover-results" class="grid"></div>
+      </section>
+      <section class="discover-section discover-rails">
+        <div class="section-heading"><h2>Trending This Week</h2></div>
+        <div id="trending-results" class="grid"></div>
+        <div class="section-heading"><h2>Top Rated</h2></div>
+        <div id="top-rated-results" class="grid"></div>
+        <div class="section-heading"><h2>Coming Soon</h2></div>
+        <div id="upcoming-results" class="grid"></div>
+      </section>
+    </main>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="logo">FLIXX</div>
+        <div class="social-links">
+          <a href="https://www.facebook.com" target="_blank"
+            ><i class="fab fa-facebook-f"></i></a
+          ><a href="https://www.twitter.com" target="_blank"
+            ><i class="fab fa-twitter"></i></a
+          ><a href="https://www.instagram.com" target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+    <div class="spinner"></div>
+  </body>
+</html>
