@@ -16,7 +16,7 @@ const global = {
 const WATCHLIST_KEY = "flixx-watchlist";
 const COMPARE_KEY = "flixx-compare";
 const RECENT_KEY = "flixx-recent";
-const discoverState = { page: 1, loading: false };
+const discoverState = { page: 1, totalPages: 1, loading: false, maxPages: 2 };
 
 function getWatchlist() {
   try {
@@ -754,6 +754,12 @@ function initContinuousSlider() {
 
 async function displayDiscoverResults(reset = true) {
   if (discoverState.loading) return;
+  if (
+    !reset &&
+    (discoverState.page >= discoverState.totalPages ||
+      discoverState.page >= discoverState.maxPages)
+  )
+    return;
   const typeSelect = document.querySelector("#discover-type");
   const genreSelect = document.querySelector("#discover-genre");
   const sortSelect = document.querySelector("#discover-sort");
@@ -783,6 +789,10 @@ async function displayDiscoverResults(reset = true) {
   const results = document.querySelector("#discover-results");
   if (reset) {
     discoverState.page = 1;
+    discoverState.totalPages = Math.min(
+      data.total_pages || 1,
+      discoverState.maxPages,
+    );
     results.innerHTML = "";
   } else {
     discoverState.page++;
