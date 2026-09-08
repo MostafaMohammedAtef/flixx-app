@@ -107,27 +107,23 @@ function highLightActiveLink() {
 // Display popular movies on the homepage
 
 async function displayPopularMovies() {
+  const target = document.querySelector("#popular-movies");
+  if (!target) return;
   showSkeletons("#popular-movies");
   const { results } = await fetchAPIData("movie/popular");
-  document.querySelector("#popular-movies").innerHTML = "";
-  results.forEach((movie) =>
-    document
-      .getElementById("popular-movies")
-      .appendChild(renderMediaCard(movie)),
-  );
+  target.innerHTML = "";
+  results.forEach((movie) => target.appendChild(renderMediaCard(movie)));
 }
 
 // Display popular TV shows on the homepage
 
 async function displayPopularTVShows() {
+  const target = document.querySelector("#popular-shows");
+  if (!target) return;
   showSkeletons("#popular-shows");
   const { results } = await fetchAPIData("tv/popular");
-  document.querySelector("#popular-shows").innerHTML = "";
-  results.forEach((show) =>
-    document
-      .getElementById("popular-shows")
-      .appendChild(renderMediaCard(show, "tv")),
-  );
+  target.innerHTML = "";
+  results.forEach((show) => target.appendChild(renderMediaCard(show, "tv")));
 }
 
 function displayValue(value, fallback = "N/A") {
@@ -625,9 +621,10 @@ async function search() {
 
 // Continuous, draggable movie slider (JS-driven, no Swiper JS instance)
 async function displaySlider() {
-  const { results } = await fetchAPIData("movie/now_playing");
   const wrapper = document.querySelector(".swiper-wrapper");
+  if (!wrapper) return;
 
+  const { results } = await fetchAPIData("movie/now_playing");
   const renderSlide = (movie) => `
     <a href="movie-details.html?id=${movie.id}">
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
@@ -964,6 +961,21 @@ function hideSpinner() {
 function init() {
   if ("serviceWorker" in navigator)
     navigator.serviceWorker.register("sw.js").catch(() => {});
+
+  if (document.body.classList.contains("home-page")) {
+    highLightActiveLink();
+    updateWatchlistCount();
+    document.querySelectorAll(".compare-count").forEach((count) => {
+      count.textContent = getCompareList().length;
+    });
+    setupTheme();
+    setupGlobalInteractions();
+    setupSearchSuggestions();
+    setupMobileNav();
+    setupKeyboardShortcuts();
+    return;
+  }
+
   switch (global.currentPage) {
     case "/":
     case "/index.html":

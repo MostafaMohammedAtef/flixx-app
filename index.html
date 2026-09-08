@@ -18,102 +18,46 @@
     <script src="js/script.js" defer></script>
     <title>Flixx</title>
   </head>
-  <body>
-    <header class="main-header">
-      <div class="container">
-        <div class="logo"><a href="/">FLIXX</a></div>
-        <nav>
-          <ul>
-            <li>
-              <a class="nav-link" href="/">Movies</a>
-            </li>
-            <li>
-              <a class="nav-link" href="/shows.html">TV Shows</a>
-            </li>
-            <li><a class="nav-link" href="/calendar.html">Calendar</a></li>
-            <li>
-              <a class="nav-link" href="/watchlist.html"
-                >Watchlist <span class="watchlist-count">0</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="/compare.html"
-                >Compare <span class="compare-count">0</span></a
-              >
-            </li>
-            <li>
-              <button
-                class="theme-toggle"
-                type="button"
-                aria-label="Toggle light theme">
-                <i class="fas fa-sun"></i>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+  <body class="home-page">
+    <main class="home-landing container">
+      <section class="landing-row">
+        <h2>ACTION NIGHT</h2>
+      </section>
 
-    <!-- Now Playing Section -->
-    <section class="now-playing">
-      <h2>Now Playing</h2>
-      <div class="swiper">
-        <div class="swiper-wrapper"></div>
-      </div>
-    </section>
+      <section class="landing-row">
+        <h2>SMART SCI-FI</h2>
+      </section>
 
-    <!-- Search Movies -->
-    <section class="search">
-      <div class="container">
-        <div id="alert"></div>
-        <form action="/search.html" class="search-form">
-          <!-- movies and shows radio box -->
-          <div class="search-radio">
-            <input type="radio" id="movie" name="type" value="movie" checked />
-            <label for="movies">Movies</label>
-            <input type="radio" id="tv" name="type" value="tv" />
-            <label for="shows">TV Shows</label>
-          </div>
-          <div class="search-flex">
-            <input
-              type="text"
-              name="search-term"
-              id="search-term"
-              list="search-suggestions"
-              placeholder="Enter search term" />
-            <datalist id="search-suggestions"></datalist>
-            <button class="btn" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
+      <section class="landing-row landing-row--recent">
+        <h2>RECENTLY VIEWED</h2>
+        <p>Your recently viewed titles will appear here.</p>
+      </section>
+    </main>
 
-    <!-- Popular Movies -->
-    <section class="container">
-      <h2>Popular Movies</h2>
-      <div id="popular-movies" class="grid"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="main-footer home-footer">
       <div class="container">
         <div class="logo"><span>FLIXX</span></div>
-        <div class="social-links">
+        <div class="social-links" aria-label="Social media links">
           <a
-            href="https://github.com/MostafaMohammedAtef"
+            href="https://facebook.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="GitHub">
-            <i class="fab fa-github"></i>
+            aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
           </a>
           <a
-            href="https://www.linkedin.com/in/mostafa-m-atef/"
+            href="https://x.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
+            aria-label="X">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
           </a>
         </div>
       </div>
