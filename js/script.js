@@ -659,7 +659,7 @@ function initContinuousSlider() {
   const wrapper = document.querySelector(".swiper-wrapper");
 
   let position = 0;
-  let speed = 2; // px p er frame — lower = slower
+  let speed = 1.4; // px per frame — lower = slower
   let isDragging = false;
   let startX = 0;
   let startPosition = 0;
