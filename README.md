@@ -66,7 +66,8 @@ The project focuses on a practical streaming-catalog experience: browse titles, 
 - Accessible labels for interactive controls
 - Cinema-inspired color system
 - Installable PWA shell through a web manifest and service worker
-- Local cached shell for repeat visits and offline navigation
+- Service-worker shell caching for faster repeat visits
+- Relative routes that work from localhost, a domain root, or a hosted subfolder
 
 ## Technology
 
@@ -181,6 +182,12 @@ Flixx can be deployed to any static hosting provider, including:
 - Firebase Hosting
 
 For PWA features and service-worker behavior, deploy over HTTPS. Localhost is also treated as a secure development origin by modern browsers.
+
+The app uses relative page and asset paths, so it can be hosted at the domain root or inside a subfolder. The service worker also builds its cache URLs from its registration scope rather than assuming the site is hosted at `/`.
+
+After deploying changes to `index.html`, `css/`, `js/`, or `sw.js`, refresh the site once with the browser's cache disabled or use a hard refresh. The service worker cache version is updated when the app shell changes. If an older version still appears, unregister the existing service worker in the browser's application settings and reload the site.
+
+TMDB requests are made in the browser and require an internet connection. The service worker does not provide offline movie data or guarantee offline navigation for pages that have not already loaded.
 
 ## Accessibility Notes
 
