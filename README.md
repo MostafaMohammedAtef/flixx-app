@@ -12,6 +12,10 @@ Flixx is a cinematic movie and TV discovery application built with **vanilla Jav
 
 The project focuses on a practical streaming-catalog experience: browse titles, search across movies and shows, explore detailed metadata, save titles for later, compare releases, and discover what is coming next.
 
+## Live Demo
+
+Visit the deployed application: [flixx-app-six.vercel.app](https://flixx-app-six.vercel.app/)
+
 ## Features
 
 ### Discovery
