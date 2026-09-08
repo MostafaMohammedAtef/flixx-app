@@ -1,4 +1,4 @@
-const CACHE_NAME = "flixx-shell-v1";
+const CACHE_NAME = "flixx-shell-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -7,6 +7,8 @@ const APP_SHELL = [
   "/watchlist.html",
   "/compare.html",
   "/calendar.html",
+  "/person-details.html",
+  "/manifest.webmanifest",
   "/css/style.css",
   "/css/spinner.css",
   "/js/script.js",

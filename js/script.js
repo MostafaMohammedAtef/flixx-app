@@ -1020,12 +1020,12 @@ function setupMobileNav() {
 async function fetchAPIData(endpoint, extraParams = "") {
   const API_KEY = global.api.apiKey;
   const API_URL = global.api.apiUrl;
+  const separator = endpoint.includes("?") ? "&" : "?";
+  const query = `api_key=${API_KEY}&language=en-US${extraParams ? `&${extraParams}` : ""}`;
 
   showSpinner();
   try {
-    const response = await fetch(
-      `${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US${extraParams ? `&${extraParams}` : ""}`,
-    );
+    const response = await fetch(`${API_URL}${endpoint}${separator}${query}`);
     if (!response.ok) throw new Error("TMDB request failed");
     return await response.json();
   } catch {
