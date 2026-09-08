@@ -962,20 +962,6 @@ function init() {
   if ("serviceWorker" in navigator)
     navigator.serviceWorker.register("sw.js").catch(() => {});
 
-  if (document.body.classList.contains("home-page")) {
-    highLightActiveLink();
-    updateWatchlistCount();
-    document.querySelectorAll(".compare-count").forEach((count) => {
-      count.textContent = getCompareList().length;
-    });
-    setupTheme();
-    setupGlobalInteractions();
-    setupSearchSuggestions();
-    setupMobileNav();
-    setupKeyboardShortcuts();
-    return;
-  }
-
   switch (global.currentPage) {
     case "/":
     case "/index.html":
