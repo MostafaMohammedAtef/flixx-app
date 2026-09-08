@@ -1,4 +1,4 @@
-const CACHE_NAME = "flixx-shell-v2";
+const CACHE_NAME = "flixx-shell-v3";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -14,12 +14,14 @@ const APP_SHELL = [
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)),
   );
 });
 
 self.addEventListener("activate", (event) => {
+  self.clients.claim();
   event.waitUntil(
     caches
       .keys()
@@ -34,7 +36,20 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.url.includes("api.themoviedb.org")) return;
+  const requestUrl = new URL(event.request.url);
+  if (event.request.method !== "GET") return;
+  if (requestUrl.origin !== self.location.origin) return;
+  if (requestUrl.hostname.includes("api.themoviedb.org")) return;
+  if (
+    requestUrl.pathname.endsWith(".html") ||
+    requestUrl.pathname.endsWith(".css") ||
+    requestUrl.pathname.endsWith(".js") ||
+    requestUrl.pathname.endsWith(".webmanifest")
+  ) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
+
   event.respondWith(
     caches
       .match(event.request)
