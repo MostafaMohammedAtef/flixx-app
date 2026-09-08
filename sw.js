@@ -1,17 +1,17 @@
-const CACHE_NAME = "flixx-shell-v3";
+const CACHE_NAME = "flixx-shell-v4";
 const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/shows.html",
-  "/watchlist.html",
-  "/compare.html",
-  "/calendar.html",
-  "/person-details.html",
-  "/manifest.webmanifest",
-  "/css/style.css",
-  "/css/spinner.css",
-  "/js/script.js",
-];
+  "./",
+  "./index.html",
+  "./shows.html",
+  "./watchlist.html",
+  "./compare.html",
+  "./calendar.html",
+  "./person-details.html",
+  "./manifest.webmanifest",
+  "./css/style.css",
+  "./css/spinner.css",
+  "./js/script.js",
+].map((path) => new URL(path, self.registration.scope).toString());
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();

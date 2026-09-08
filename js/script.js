@@ -968,7 +968,9 @@ function hideSpinner() {
 
 function init() {
   if ("serviceWorker" in navigator)
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+    navigator.serviceWorker
+      .register("./sw.js", { updateViaCache: "none" })
+      .catch(() => {});
 
   switch (global.currentPage) {
     case "index.html":
