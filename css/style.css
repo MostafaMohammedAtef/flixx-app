@@ -341,3 +341,26 @@ section h2 {
 .alert-error {
   background: red;
 }
+
+.swiper-wrapper {
+  display: flex !important;
+  width: max-content !important;
+  transition: none !important;
+  animation: marquee 40s linear infinite;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 220px; /* match your card/poster width */
+  margin-right: 30px;
+  transition: none !important;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.swiper:hover .swiper-wrapper {
+  animation-play-state: paused;
+}
