@@ -8,30 +8,21 @@
 ![Font Awesome](https://img.shields.io/badge/Font%20Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
 
+## Live Demo
+
+[flixx-app-six.vercel.app](https://flixx-app-six.vercel.app/)
+
 Flixx is a cinematic movie and TV discovery application built with **vanilla JavaScript**, semantic HTML, and custom CSS. It uses the **TMDB API** to fetch movie, television, cast, crew, trailer, recommendation, and release data in real time.
 
 The project focuses on a practical streaming-catalog experience: browse titles, search across movies and shows, explore detailed metadata, save titles for later, compare releases, and discover what is coming next.
 
-## Live Demo
-
-Visit the deployed application: [flixx-app-six.vercel.app](https://flixx-app-six.vercel.app/)
-
 ## Features
 
-### Discovery
+### Browsing
 
 - Now Playing movie rail with continuous movement and drag support
 - Popular movies and popular TV shows
-- Dedicated Discover page
-- Trending this week, top-rated, and upcoming movie sections
-- Genre filtering
-- Movie and TV show format filtering
-- Minimum rating filtering
-- Release-year range filtering
-- Popularity, rating, and release-date sorting
-- Infinite scrolling on Discover results
 - Upcoming release calendar
-- Genre-based homepage rails
 
 ### Search
 
@@ -100,7 +91,6 @@ No React, Vue, Angular, build tool, or package manager is required.
 ├── search.html             # Search results
 ├── movie-details.html      # Movie details
 ├── tv-details.html         # TV show details
-├── discover.html           # Filtered discovery experience
 ├── watchlist.html          # Saved movies and shows
 ├── compare.html            # Side-by-side title comparison
 ├── calendar.html           # Upcoming release calendar

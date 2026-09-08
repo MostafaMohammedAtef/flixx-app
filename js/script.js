@@ -16,7 +16,6 @@ const global = {
 const WATCHLIST_KEY = "flixx-watchlist";
 const COMPARE_KEY = "flixx-compare";
 const RECENT_KEY = "flixx-recent";
-const discoverState = { page: 1, totalPages: 1, loading: false, maxPages: 2 };
 
 function getWatchlist() {
   try {
@@ -129,34 +128,6 @@ async function displayPopularTVShows() {
       .getElementById("popular-shows")
       .appendChild(renderMediaCard(show, "tv")),
   );
-}
-
-async function displayHomeRails() {
-  const rails = [
-    ["#action-movies", "discover/movie?with_genres=28&sort_by=popularity.desc"],
-    [
-      "#scifi-movies",
-      "discover/movie?with_genres=878&sort_by=vote_average.desc&vote_count.gte=100",
-    ],
-  ];
-  rails.forEach(([selector]) => showSkeletons(selector, 4));
-  const responses = await Promise.all(
-    rails.map(([, endpoint]) => fetchAPIData(endpoint)),
-  );
-  responses.forEach((data, index) => {
-    const target = document.querySelector(rails[index][0]);
-    target.innerHTML = "";
-    data.results
-      ?.slice(0, 4)
-      .forEach((item) => target.appendChild(renderMediaCard(item)));
-  });
-  const recent = document.querySelector("#recent-movies");
-  getRecent()
-    .slice(0, 4)
-    .forEach((item) => recent.appendChild(renderMediaCard(item, item.type)));
-  if (!recent.children.length)
-    recent.innerHTML =
-      '<p class="empty-inline">Your recently viewed titles will appear here.</p>';
 }
 
 function displayValue(value, fallback = "N/A") {
@@ -752,78 +723,6 @@ function initContinuousSlider() {
   animate();
 }
 
-async function displayDiscoverResults(reset = true) {
-  if (discoverState.loading) return;
-  if (
-    !reset &&
-    (discoverState.page >= discoverState.totalPages ||
-      discoverState.page >= discoverState.maxPages)
-  )
-    return;
-  const typeSelect = document.querySelector("#discover-type");
-  const genreSelect = document.querySelector("#discover-genre");
-  const sortSelect = document.querySelector("#discover-sort");
-  const rating = document.querySelector("#discover-rating").value;
-  const yearFrom = document.querySelector("#discover-year-from").value;
-  const yearTo = document.querySelector("#discover-year-to").value;
-  const type = typeSelect.value;
-  const genre = genreSelect.value;
-  const sort =
-    type === "tv" && sortSelect.value === "primary_release_date.desc"
-      ? "first_air_date.desc"
-      : sortSelect.value;
-  const params = [
-    `sort_by=${sort}`,
-    "include_adult=false",
-    "include_video=false",
-    `page=${reset ? 1 : discoverState.page + 1}`,
-  ];
-  if (genre) params.push(`with_genres=${genre}`);
-  if (rating) params.push(`vote_average.gte=${rating}`);
-  const dateField = type === "tv" ? "first_air_date" : "primary_release_date";
-  if (yearFrom) params.push(`${dateField}.gte=${yearFrom}-01-01`);
-  if (yearTo) params.push(`${dateField}.lte=${yearTo}-12-31`);
-  discoverState.loading = true;
-  if (reset) showSkeletons("#discover-results", 12);
-  const data = await fetchAPIData(`discover/${type}`, params.join("&"));
-  const results = document.querySelector("#discover-results");
-  if (reset) {
-    discoverState.page = 1;
-    discoverState.totalPages = Math.min(
-      data.total_pages || 1,
-      discoverState.maxPages,
-    );
-    results.innerHTML = "";
-  } else {
-    discoverState.page++;
-  }
-  data.results?.forEach((item) =>
-    results.appendChild(renderMediaCard(item, type)),
-  );
-  document.querySelector("#discover-heading").textContent =
-    `${type === "movie" ? "Movie" : "TV"} picks for you`;
-  discoverState.loading = false;
-}
-
-async function displayDiscoverRails() {
-  const rails = [
-    ["#trending-results", "trending/movie/week"],
-    ["#top-rated-results", "movie/top_rated"],
-    ["#upcoming-results", "movie/upcoming"],
-  ];
-  rails.forEach(([selector]) => showSkeletons(selector, 4));
-  const responses = await Promise.all(
-    rails.map(([, endpoint]) => fetchAPIData(endpoint)),
-  );
-  responses.forEach((data, index) => {
-    const target = document.querySelector(rails[index][0]);
-    target.innerHTML = "";
-    data.results
-      ?.slice(0, 4)
-      .forEach((item) => target.appendChild(renderMediaCard(item)));
-  });
-}
-
 async function displayReleaseCalendar() {
   const target = document.querySelector("#release-calendar");
   if (!target) return;
@@ -1070,7 +969,6 @@ function init() {
     case "/index.html":
       displaySlider();
       displayPopularMovies();
-      displayHomeRails();
       break;
     case "/shows.html":
       displayPopularTVShows();
@@ -1086,28 +984,6 @@ function init() {
       break;
     case "/search.html":
       search();
-      break;
-    case "/discover.html":
-      document.querySelector("#discover-type").value =
-        new URLSearchParams(window.location.search).get("type") || "movie";
-      document.querySelector("#discover-genre").value =
-        new URLSearchParams(window.location.search).get("genre") || "";
-      displayDiscoverResults();
-      displayDiscoverRails();
-      document
-        .querySelector("#discover-filters")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
-          displayDiscoverResults();
-        });
-      window.addEventListener("scroll", () => {
-        if (
-          window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 500
-        ) {
-          displayDiscoverResults(false);
-        }
-      });
       break;
     case "/watchlist.html":
       displayWatchlist();
