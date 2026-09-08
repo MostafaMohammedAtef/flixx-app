@@ -1,5 +1,8 @@
 const global = {
-  currentPage: window.location.pathname,
+  currentPage: (() => {
+    const path = window.location.pathname.split("/").pop() || "index.html";
+    return path || "index.html";
+  })(),
   search: {
     term: "",
     type: "",
@@ -96,9 +99,14 @@ function renderMediaCard(item, type = "movie") {
 
 function highLightActiveLink() {
   const links = document.querySelectorAll(".nav-link");
+  const currentPage = global.currentPage || "index.html";
 
   links.forEach((link) => {
-    if (link.getAttribute("href") === global.currentPage) {
+    const href =
+      (link.getAttribute("href") || "")
+        .replace(/^\.\//, "")
+        .replace(/\/+$/, "") || "index.html";
+    if (href === currentPage) {
       link.classList.add("active");
     }
   });
@@ -963,33 +971,33 @@ function init() {
     navigator.serviceWorker.register("sw.js").catch(() => {});
 
   switch (global.currentPage) {
-    case "/":
-    case "/index.html":
+    case "index.html":
+    case "":
       displaySlider();
       displayPopularMovies();
       break;
-    case "/shows.html":
+    case "shows.html":
       displayPopularTVShows();
       break;
-    case "/movie-details.html":
+    case "movie-details.html":
       displayMovieDetails();
       break;
-    case "/tv-details.html":
+    case "tv-details.html":
       displayShowDetails();
       break;
-    case "/person-details.html":
+    case "person-details.html":
       displayPersonDetails();
       break;
-    case "/search.html":
+    case "search.html":
       search();
       break;
-    case "/watchlist.html":
+    case "watchlist.html":
       displayWatchlist();
       break;
-    case "/compare.html":
+    case "compare.html":
       renderComparePage();
       break;
-    case "/calendar.html":
+    case "calendar.html":
       displayReleaseCalendar();
       break;
     default:
